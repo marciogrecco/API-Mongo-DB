@@ -2,11 +2,16 @@ package com.mongodb.java.domain;
 
 import java.io.Serializable;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	@Id
+	private String id;
 	private String nome;
 	private String email;
 
@@ -14,18 +19,18 @@ public class User implements Serializable {
 
 	}
 
-	public User(Integer id, String nome, String email) {
+	public User(String id, String nome, String email) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
