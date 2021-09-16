@@ -38,18 +38,10 @@ public class UserServices {
 		return repo.save(newObj);
 	}
 
-
-	
-		
-
-	
-	
-
 	private void updateData(User newObj, User obj) {
-			newObj.setNome(obj.getNome());
-			newObj.setEmail(obj.getEmail());
-		
-		
+		newObj.setNome(obj.getNome());
+		newObj.setEmail(obj.getEmail());
+
 	}
 
 	public void deleteByID(String id) {

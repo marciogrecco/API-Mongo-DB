@@ -1,12 +1,15 @@
 package com.mongodb.java.config;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
+import com.mongodb.java.domain.Post;
 import com.mongodb.java.domain.User;
+import com.mongodb.java.repository.PostRepository;
 import com.mongodb.java.repository.UserRepository;
 
 @Configuration
@@ -14,10 +17,13 @@ public class Instantiation implements CommandLineRunner {
 
 	@Autowired
 	private UserRepository repoUser;
+	@Autowired
+	private PostRepository repoPost;
 
 	@Override
 	public void run(String... args) throws Exception {
 		
+		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 
 		repoUser.deleteAll();
 		User maria = new User(null, "Maria Brown", "maria@gmail.com");
@@ -28,7 +34,13 @@ public class Instantiation implements CommandLineRunner {
 		User silas = new User(null, "silas alberto", "silas@gmail.com");
 		User brian = new User(null, "brian neves", "brias@gmail.com");
 
-	   repoUser.saveAll(Arrays.asList(maria,alex,bob,max,rob,silas,brian));
+	   
+		Post p1 = new Post(null,data.parse("28/03/2018"),"Hoje acordei feliz","Vou viajar para são paulo abraços",maria);
+		Post p2 = new Post(null,data.parse("30/10/2018"),"Bom dia","Tenha um òtimo dia",alex);
+		
+		
+		repoPost.saveAll(Arrays.asList(p1,p2));
+		repoUser.saveAll(Arrays.asList(maria,alex,bob,max,rob,silas,brian));
 	
 	}
 
