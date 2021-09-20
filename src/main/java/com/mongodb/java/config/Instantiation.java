@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
+import com.mongodb.java.DTO.AuthorDTO;
 import com.mongodb.java.domain.Post;
 import com.mongodb.java.domain.User;
 import com.mongodb.java.repository.PostRepository;
@@ -22,7 +23,7 @@ public class Instantiation implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		
+
 		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 
 		repoUser.deleteAll();
@@ -33,15 +34,16 @@ public class Instantiation implements CommandLineRunner {
 		User rob = new User(null, "rob Grey", "rob@gmail.com");
 		User silas = new User(null, "silas alberto", "silas@gmail.com");
 		User brian = new User(null, "brian neves", "brias@gmail.com");
-
-	   
-		Post p1 = new Post(null,data.parse("28/03/2018"),"Hoje acordei feliz","Vou viajar para são paulo abraços",maria);
-		Post p2 = new Post(null,data.parse("30/10/2018"),"Bom dia","Tenha um òtimo dia",alex);
 		
+		Post p1 = new Post(null, data.parse("28/03/2018"), "Hoje acordei feliz", "Vou viajar para são paulo abraços",
+				new AuthorDTO(maria));
+		Post p2 = new Post(null, data.parse("30/10/2018"), "Bom dia", "Tenha um òtimo dia", new AuthorDTO(maria));
+		repoPost.saveAll(Arrays.asList(p1, p2));
 		
-		repoPost.saveAll(Arrays.asList(p1,p2));
-		repoUser.saveAll(Arrays.asList(maria,alex,bob,max,rob,silas,brian));
-	
+		repoUser.saveAll(Arrays.asList(maria, alex, bob, max, rob, silas, brian));
+        repoPost.saveAll(Arrays.asList(p1,p2));
+        
+        maria.getPost().addAll(Arrays.asList(p1,p2));
 	}
 
 }
