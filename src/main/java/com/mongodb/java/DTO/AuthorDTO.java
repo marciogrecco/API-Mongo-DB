@@ -2,8 +2,8 @@ package com.mongodb.java.DTO;
 
 import java.io.Serializable;
 
-import com.mongodb.java.domain.User;
 
+import com.mongodb.java.domain.User;
 public class AuthorDTO implements Serializable {
 
 	
@@ -13,14 +13,16 @@ public class AuthorDTO implements Serializable {
 	private String email;
 	
 	
+	public AuthorDTO() {
+		
+	}
 
 	public AuthorDTO(User obj) {
 		id = obj.getId();
 		id = obj.getEmail();
+	    
+	
 	}
-
-
-
 
 
 	public String getId() {
@@ -42,5 +44,7 @@ public class AuthorDTO implements Serializable {
 		this.email = email;
 	}
 
+
+	
 
 }
