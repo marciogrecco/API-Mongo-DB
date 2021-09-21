@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import com.mongodb.java.DTO.AuthorDTO;
+import com.mongodb.java.DTO.CommentsDTO;
 import com.mongodb.java.domain.Post;
 import com.mongodb.java.domain.User;
 import com.mongodb.java.repository.PostRepository;
@@ -40,6 +41,14 @@ public class Instantiation implements CommandLineRunner {
 		Post p2 = new Post(null, data.parse("30/10/2018"), "Bom dia", "Tenha um òtimo dia", new AuthorDTO(maria));
 		repoPost.saveAll(Arrays.asList(p1, p2));
 		
+		CommentsDTO c1 = new CommentsDTO( "Boa viagem mano", data.parse("21/03/2018"),new AuthorDTO(alex));
+		CommentsDTO c2 = new CommentsDTO( "Aproveite!", data.parse("22/03/2018"),new AuthorDTO(bob));
+		CommentsDTO c3 = new CommentsDTO( "Tenha um ótimo dia", data.parse("23/03/2018"),new AuthorDTO(alex));
+		
+		
+		p1.getComments().addAll(Arrays.asList(c1,c2));
+		p2.getComments().addAll(Arrays.asList(c3));
+		repoPost.saveAll(Arrays.asList(p1,p2));
 		repoUser.saveAll(Arrays.asList(maria, alex, bob, max, rob, silas, brian));
         
         maria.getPost().addAll(Arrays.asList(p2));
