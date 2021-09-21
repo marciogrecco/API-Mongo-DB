@@ -1,15 +1,13 @@
 package com.mongodb.java.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 
 import com.mongodb.java.domain.Post;
-
 import com.mongodb.java.repository.PostRepository;
-
 import com.mongodb.java.services.exeption.ObjectNotFoundException;
 
 @Service
@@ -24,4 +22,8 @@ public class PostServices {
 
 	}
 
+	public List<Post> findByTitle(String text) {
+
+		return repoPost.findByTitleContaining(text);
+	}
 }

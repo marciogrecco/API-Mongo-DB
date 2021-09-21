@@ -1,8 +1,11 @@
 package com.mongodb.java.DTO;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CommentsDTO {
+public class CommentsDTO implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private String text;
 	private Date date;
 	private AuthorDTO autor;
